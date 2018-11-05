@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Weather at this location</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<p th:text="'The weather today is ' + ${weather}" />
+    <p th:text="'Highest temperature here is ' + ${highTemp}" />
+    <p th:text="'Lowest temperature here is ' + ${lowTemp}" />
+    <p th:text="'Humidity is ' + ${humidity}" />
+    
+</body>
+</html>
