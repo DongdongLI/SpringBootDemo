@@ -16,7 +16,6 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 import model.User;
 import request.TodoListRequest;
 
@@ -37,16 +36,24 @@ public class TodoList {
 			fetch = FetchType.LAZY)
 	private List<TodoListItem> list = new ArrayList<>();
 	
-	@OneToOne
-	@JoinColumn(name="userId")
-	private User user;
+//	@OneToOne
+//	@JoinColumn(name="userId")
+//	private User user;
 	
-	public TodoList(String name, User user) {
+//	public TodoList(String name, User user) {
+//		this.name = name;
+//		this.user = user;
+//	}
+	
+	public TodoList(String name) {
 		this.name = name;
-		this.user = user;
 	}
 	
-	public static TodoList from (TodoListRequest todoListRequest, User user) {
-		return new TodoList(todoListRequest.getName(), user);
+//	public static TodoList from (TodoListRequest todoListRequest, User user) {
+//		return new TodoList(todoListRequest.getName(), user);
+//	}
+	
+	public static TodoList from (TodoListRequest todoListRequest) {
+		return new TodoList(todoListRequest.getName());
 	}
 }

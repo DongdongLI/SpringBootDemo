@@ -13,9 +13,9 @@ import lombok.Setter;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class TodoListItemRequest {
 	private boolean done;
-	private String desc;
+	private String description;
 	
-	public TodoListItemRequest(String desc) {
-		this.desc = desc;
+	public TodoListItemRequest(String description) {
+		this.description = description;
 	}
 }

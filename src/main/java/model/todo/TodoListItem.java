@@ -18,6 +18,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import model.User;
+import request.TodoListItemRequest;
 
 @Entity
 @NoArgsConstructor
@@ -39,16 +40,23 @@ public class TodoListItem {
 	@JsonIgnore
 	private TodoList list;
 	
-	@OneToOne
-	@JoinColumn(name="userId")
-	@JsonIgnore
-	private User user;
+//	@OneToOne
+//	@JoinColumn(name="userId")
+//	@JsonIgnore
+//	private User user;
 
-	public TodoListItem(String description, TodoList list, User user) {
+//	public TodoListItem(String description, TodoList list, User user) {
+//		this.description = description;
+//		this.list = list;
+//		this.user = user;
+//	}
+	
+	public TodoListItem(String description, TodoList list) {
 		this.description = description;
 		this.list = list;
-		this.user = user;
 	}
 	
-	
+	public static TodoListItem from(TodoListItemRequest todoListItemRequest, TodoList todoList) {
+		return new TodoListItem(todoListItemRequest.getDescription(), todoList);
+	}
 }
