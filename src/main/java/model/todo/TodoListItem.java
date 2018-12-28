@@ -59,4 +59,9 @@ public class TodoListItem {
 	public static TodoListItem from(TodoListItemRequest todoListItemRequest, TodoList todoList) {
 		return new TodoListItem(todoListItemRequest.getDescription(), todoList);
 	}
+	
+	public void update(TodoListItemRequest request) {
+		setDescription(request.getDescription());
+		setDone(request.isDone());
+	}
 }

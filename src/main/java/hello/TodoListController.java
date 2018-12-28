@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import model.User;
@@ -73,5 +74,24 @@ public class TodoListController {
 		TodoList todoList = todoListRepository.findTodoListById(id);
 		todoListItemRepository.deleteTodoListItemByIdAndList(todoListItemId, todoList);
 		return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+	}
+	
+	@PutMapping("/lists/{id}")
+	public ResponseEntity<String> update(@PathVariable("id") Long id, @RequestBody TodoListRequest todoListRequest) {
+		TodoList todoList = todoListRepository.findTodoListById(id);
+		todoList.update(todoListRequest);
+		todoListRepository.save(todoList);
+		return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+	}
+	
+	@PutMapping("lists/{id}/items/{itemId}")
+	public ResponseEntity<String> updateItem(@PathVariable("id") Long id, 
+			@PathVariable("itemId") Long itemId,
+			@RequestBody TodoListItemRequest request) {
+		TodoList todoList = todoListRepository.findTodoListById(id);
+		TodoListItem todoListItem = todoListItemRepository.findTodoListItemByIdAndList(itemId, todoList);
+		todoListItem.update(request);
+		todoListItemRepository.save(todoListItem);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 }

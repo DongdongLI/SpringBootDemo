@@ -56,4 +56,8 @@ public class TodoList {
 	public static TodoList from (TodoListRequest todoListRequest) {
 		return new TodoList(todoListRequest.getName());
 	}
+	
+	public void update(TodoListRequest request) {
+		setName(request.getName());
+	}
 }
