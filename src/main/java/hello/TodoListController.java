@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,5 +55,23 @@ public class TodoListController {
 	public ResponseEntity<Iterable<TodoList>> list() {
 		List<TodoList> allLists = todoListRepository.findAll();
 		return new ResponseEntity<>(allLists, HttpStatus.OK);
+	}
+	
+	@GetMapping("/lists/{id}")
+	public ResponseEntity<TodoList> get(@PathVariable("id") Long id) {
+		return new ResponseEntity<>(todoListRepository.findTodoListById(id), HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/lists/{id}")
+	public ResponseEntity<String> delete(@PathVariable("id") Long id){
+		todoListRepository.deleteById(id);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
+	
+	@DeleteMapping("/lists/{id}/items/{itemId}")
+	public ResponseEntity<String> delete(@PathVariable("id") Long id, @PathVariable("itemId") Long todoListItemId){
+		TodoList todoList = todoListRepository.findTodoListById(id);
+		todoListItemRepository.deleteTodoListItemByIdAndList(todoListItemId, todoList);
+		return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
 	}
 }
