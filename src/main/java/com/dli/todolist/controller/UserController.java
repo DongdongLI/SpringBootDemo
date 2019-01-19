@@ -33,14 +33,18 @@ public class UserController {
 	
 	@PostMapping("/signup")
 	public String signUp(@ModelAttribute("userForm") User userForm, BindingResult result, Model model) {
+			
 		userValidator.validate(userForm, result);
-		if(result.hasErrors())
+		if(result.hasErrors()) {
+			System.out.println(result.getAllErrors());
 			return "signup";
+		}
+			
 		userService.save(userForm);
 		
-		securityService.autoLogin(userForm.getUsername(), userForm.getPassword());
+		securityService.autoLogin(userForm.getUsername(), userForm.getPasswordConfirm());
 		
-		return "redirect:/welcome";
+		return "redirect:/login";
 	}
 	
 	@GetMapping("/login")

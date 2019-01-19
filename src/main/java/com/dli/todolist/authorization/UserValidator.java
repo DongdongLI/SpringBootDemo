@@ -26,6 +26,9 @@ public class UserValidator implements Validator{
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "NotEMPTY");
 		if(userService.findUserByName(user.getUsername()) != null)
 			errors.reject("username", "This username is already taken");
+//		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEMPTY");		
+//		if(userService.findUserByName(user.getName()) != null)
+//			errors.reject("name", "This username is already taken");
 		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEMPTY");
 		if(!user.getPassword().equals(user.getPasswordConfirm()))

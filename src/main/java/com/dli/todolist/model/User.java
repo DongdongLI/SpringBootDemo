@@ -104,23 +104,46 @@ public class User implements UserDetails, Serializable{
 		return accountNonExpired;
 	}
 
+	public void setAccountNonExpired(boolean accountNonExpired) {
+		this.accountNonExpired = accountNonExpired;
+	}
+	
 	@Override
 	public boolean isAccountNonLocked() {
 		// TODO Auto-generated method stub
 		return accountNonLocked;
 	}
 
+	public void setAccountNonLocked(boolean accountNonLocked) {
+		this.accountNonLocked = accountNonLocked;
+	}
+	
 	@Override
 	public boolean isCredentialsNonExpired() {
 		// TODO Auto-generated method stub
 		return credentialsNonExpired;
 	}
 
+	public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+		this.credentialsNonExpired = credentialsNonExpired;
+	}
+	
 	@Override
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
 		return enabled;
 	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 	
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password
+				+ ", passwordConfirm=" + passwordConfirm + ", accountNonExpired=" + accountNonExpired
+				+ ", accountNonLocked=" + accountNonLocked + ", credentialsNonExpired=" + credentialsNonExpired
+				+ ", enabled=" + enabled + ", roles=" + roles + "]";
+	}
 	
 }
