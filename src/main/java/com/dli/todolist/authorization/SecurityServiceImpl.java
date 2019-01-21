@@ -33,6 +33,20 @@ public class SecurityServiceImpl implements SecurityService{
 	}
 	
 	@Override
+	public void login(String username, String password) {
+		UserDetails userDetail = userDetailService.loadUserByUsername(username);
+		UsernamePasswordAuthenticationToken authenticationToken = 
+				new UsernamePasswordAuthenticationToken(userDetail, 
+						password, userDetail.getAuthorities());
+		
+		authenticationManager.authenticate(authenticationToken);
+		if(authenticationToken.isAuthenticated()) {
+			SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+			System.out.println("\nLogin successfully.\n");
+		}
+	}
+	
+	@Override
 	public String findLoggedInUsername() {
 		Object userDetail = SecurityContextHolder.getContext().getAuthentication()
 				.getDetails();

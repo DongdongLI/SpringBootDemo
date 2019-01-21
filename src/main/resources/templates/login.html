@@ -19,14 +19,14 @@
 	
 		<div class="container">
 		
-		    <form method="POST" action="${contextPath}/login" class="form-signin">
+		    <form method="POST" action="#" th:action="@{/login}" modelAttribute="userForm" class="form-signin">
 		        <h2 class="form-heading">Log in</h2>
 		
 		        <div class="form-group ${error != null ? 'has-error' : ''}">
 		            <span th:text="${message}"></span>
-		            <input name="username" type="text" class="form-control" placeholder="Username"
+		            <input name="username" type="text" class="form-control" th:field="${userForm.email}" required="true" placeholder="Username"
 		                   autofocus="true"/>
-		            <input name="password" type="password" class="form-control" placeholder="Password"/>
+		            <input name="password" type="password" class="form-control" th:field="${userForm.password}" required="true" placeholder="Password"/>
 		            <span th:text="${error}"></span>
 		            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		

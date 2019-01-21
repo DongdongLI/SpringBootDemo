@@ -44,7 +44,7 @@ public class UserController {
 		
 		securityService.autoLogin(userForm.getUsername(), userForm.getPasswordConfirm());
 		
-		return "redirect:/login";
+		return "redirect:/greeting";
 	}
 	
 	@GetMapping("/login")
@@ -54,7 +54,29 @@ public class UserController {
 		
 		if(logout != null)
 			model.addAttribute("message", "You have been logged out successfully. ");
-		
+		model.addAttribute("userForm", new User());
 		return "login";
 	}
+	
+	@PostMapping("/login")
+	public String login(@ModelAttribute("userForm") User userForm, BindingResult result, Model model) {
+		
+		if(userService.findUserByName(userForm.getUsername()) == null) {
+			System.out.println("\nUser not exist. \n");
+			return "login";
+		}					
+		securityService.login(userForm.getUsername(), userForm.getPassword());
+		return "redirect:/greeting";
+	}
+	
+//	@PostMapping("/logout")
+//	public String login(Model model) {
+//		String userName = securityService.findLoggedInUsername();
+//		if(userName == null) {
+//			System.out.println("Shit...");
+//			return "login";
+//		}
+//			
+//		return "login";
+//	}
 }
